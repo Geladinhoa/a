@@ -1,0 +1,84 @@
+if game.PlaceId == 2051725963 then
+
+    --Load
+    local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+    --Main
+    local Window = OrionLib:MakeWindow({Name = "Teste HUB", HidePremium = false, SaveConfig = true, ConfigFolder = "Teste", IntroEnabled = false})
+
+    --Valor
+    _G.AutoAtk = true
+
+    --Funcao
+    function AutoAtk()
+        while _G.AutoAtk == true do
+            game:GetService("ReplicatedStorage").Remotes.Training.Combat:InvokeServer()
+            wait(0.1)
+        end
+    end
+    function AutoDefesa()
+        while _G.AutoDefesa == true do
+
+            game:GetService("ReplicatedStorage").Remotes.Training.Defense:InvokeServer()
+
+            wait(0.1)
+        end
+    end
+
+ 
+
+
+
+
+    --Jogador
+    local JogadorTab = Window:MakeTab({
+        Name = "Jogador",
+        Icon = "rbxassetid://4483345998",
+        PremiumOnly = false
+    })
+    local Section = JogadorTab:AddSection({
+        Name = "Player"
+    })
+    JogadorTab:AddButton({
+        Name = "TheOne",
+        Callback = function()
+
+            local A_1 = 
+            {
+                [1] = 
+                {
+                    [1] = "TheOne", 
+                    [2] = 0, 
+                    [3] = 0, 
+	                [4] = 0
+            }, 
+            [2] = "Modes"
+        }
+local Event = game:GetService("ReplicatedStorage").Remotes.RequestSkill
+Event:InvokeServer(A_1)
+
+game:GetService("ReplicatedStorage").Remotes.RequestSkill:InvokeServer(unpack(args))
+end    
+    })
+    local Section = JogadorTab:AddSection({
+        Name = "Auto-Farm"
+    })
+    JogadorTab:AddToggle({
+        Name = "Auto-Ataque",
+        Default = false,
+        Callback = function(Value)
+            _G.AutoAtk = Value
+            AutoAtk()
+        end    
+    })
+    JogadorTab:AddToggle({
+        Name = "Auto-Defesa",
+        Default = false,
+        Callback = function(Value)
+            _G.AutoDefesa = Value
+            AutoDefesa()
+        end    
+    })
+
+
+end
